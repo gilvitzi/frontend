@@ -2,7 +2,7 @@ import "@polymer/paper-input/paper-input";
 import { html } from "@polymer/polymer/lib/utils/html-tag";
 /* eslint-plugin-disable lit */
 import { PolymerElement } from "@polymer/polymer/polymer-element";
-import "../../../../components/ha-icon";
+import "../../../../components/ha-icon-input";
 
 class HaCustomizeIcon extends PolymerElement {
   static get template() {
@@ -11,20 +11,13 @@ class HaCustomizeIcon extends PolymerElement {
         :host {
           @apply --layout-horizontal;
         }
-        .icon-image {
-          border: 1px solid grey;
-          padding: 8px;
-          margin-right: 20px;
-          margin-top: 10px;
-        }
       </style>
-      <ha-icon class="icon-image" icon="[[item.value]]"></ha-icon>
-      <paper-input
+      <ha-icon-input
+        value="[[item.value]]"
         disabled="[[item.secondary]]"
+        placeholder="mdi:home"
         label="Icon"
-        value="{{item.value}}"
-      >
-      </paper-input>
+      ></ha-icon-input>
     `;
   }
 

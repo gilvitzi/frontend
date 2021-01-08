@@ -84,3 +84,23 @@ export const checkCacheVersion = () => {
     }
   });
 };
+
+type IconSetName = string;
+type IconID = [IconSetName, string];
+
+export const getAllIconNames = () => {
+  return new Promise<IconID[]>((resolve, reject) => {
+    let results: IconID[] = [];
+    iconStore._withIDBStore("readonly", (store) => {
+      const allNamesReq = store.getAllKeys();
+      allNamesReq.onsuccess = () => {
+        allNamesReq.result.forEach((item) => {
+          if (item != "_version") results.push(["mdi", item.toString()]);
+        });
+        resolve(results);
+      };
+
+      allNamesReq.onerror = (err) => reject(err);
+    });
+  });
+};
